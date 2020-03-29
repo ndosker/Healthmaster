@@ -78,6 +78,30 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
                 + "DayID Date,"
                 + "UserID INTEGER NOT NULL, "
                 + "CONSTRAINT pk_eatdrink PRIMARY KEY(DrinkID, DayID, UserID));");
+
+        // Insert initial data
+        insertUser(db, "Annie", "Azul");
+        insertUser(db, "Betty", "Blue");
+        insertUser(db, "Casey", "Cyan");
+        insertUser(db, "Danny", "Denim");
+
+        insertMHealth(db, 0, 1, null);
+        insertMHealth(db, 20191201, 1, 1, 5,
+                "Very happy, excited, enthusiastic and motivated", "I got a promotion!");
+        insertMHealth(db, 1, 1, "Lamp, tv, fridge, shelf, desk", "Carpet, cat fur, leather, book cover",
+                "Cars, talking from the other room, tapping on a keyboard", "Popcorn, beer",
+                "I'm in my dorm room; it's a bit small, but cozy. I can relax here.");
+        insertMHealth(db, 2, 1, 4, "Confused, excited, nervous",
+                "I didn't get the part in the play, but I got a callback");
+
+        insertFood(db, "Lucky Charms", 110.0, 1.0,
+                10.0, 0.0, 55.0, false);
+        insertDrink(db, "Coke Zero", 0.0, 0.0, 40.0);
+
+        insertPHealth(db, 1, 20190403);
+
+        insertFoodEntry(db, 1, 20190403, 1);
+        insertDrinkEntry(db, 1, 20190403, 1);
     }
 
     @Override
@@ -94,7 +118,16 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertPHealth(SQLiteDatabase db,
-                                   String day,
+                                      Integer day,
+                                      Integer user){
+        ContentValues pHealthValues = new ContentValues();
+        pHealthValues.put("DayID", day);
+        pHealthValues.put("UserID", user);
+        db.insert("PHYSICALHEALTH", null, pHealthValues);
+    }
+
+    private static void insertPHealth(SQLiteDatabase db,
+                                   Integer day,
                                    Integer user,
                                    Integer excer,
                                    Integer food,
@@ -113,7 +146,68 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertMHealth(SQLiteDatabase db,
-                                      String day,
+                                       Integer day,
+                                       Integer user,
+                                       Integer mLevel){
+        ContentValues mHealthValues = new ContentValues();
+        mHealthValues.put("DayID", day);
+        mHealthValues.put("UserID", user);
+        mHealthValues.put("MoodLevel", mLevel);
+        db.insert("MENTALHEALTH", null, mHealthValues);
+    }
+
+    private static void insertMHealth(SQLiteDatabase db,
+                                      Integer day,
+                                      Integer user,
+                                      Integer mood,
+                                      Integer mLevel,
+                                      String mDesc,
+                                      String mTrigger){
+        ContentValues mHealthValues = new ContentValues();
+        mHealthValues.put("DayID", day);
+        mHealthValues.put("UserID", user);
+        mHealthValues.put("MoodID", mood);
+        mHealthValues.put("MoodLevel", mLevel);
+        mHealthValues.put("MoodDesc", mDesc);
+        mHealthValues.put("MoodTrigger", mTrigger);
+        db.insert("MENTALHEALTH", null, mHealthValues);
+    }
+    private static void insertMHealth(SQLiteDatabase db,
+                                      Integer user,
+                                      Integer mood,
+                                      Integer mLevel,
+                                      String mDesc,
+                                      String mTrigger){
+        ContentValues mHealthValues = new ContentValues();
+        mHealthValues.put("UserID", user);
+        mHealthValues.put("MoodID", mood);
+        mHealthValues.put("MoodLevel", mLevel);
+        mHealthValues.put("MoodDesc", mDesc);
+        mHealthValues.put("MoodTrigger", mTrigger);
+        db.insert("MENTALHEALTH", null, mHealthValues);
+    }
+
+    private static void insertMHealth(SQLiteDatabase db,
+                                      Integer user,
+                                      Integer anx,
+                                      String Lo5,
+                                      String T4,
+                                      String Li3,
+                                      String S2,
+                                      String DesSur){
+        ContentValues mHealthValues = new ContentValues();
+        mHealthValues.put("UserID", user);
+        mHealthValues.put("AnxID", anx);
+        mHealthValues.put("Lo5", Lo5);
+        mHealthValues.put("T4", T4);
+        mHealthValues.put("Li3", Li3);
+        mHealthValues.put("S2", S2);
+        mHealthValues.put("DesSur", DesSur);
+        db.insert("MENTALHEALTH", null, mHealthValues);
+    }
+
+    private static void insertMHealth(SQLiteDatabase db,
+                                      Integer day,
                                       Integer user,
                                       Integer anx,
                                       Integer mood,
@@ -142,7 +236,6 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertFood(SQLiteDatabase db,
-                                   Integer FoodID,
                                    String FoodName,
                                    Double FoodCal,
                                    Double FoodFat,
@@ -151,7 +244,6 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
                                    Double FoodPotas,
                                    Boolean Microwaved){
         ContentValues foodValues = new ContentValues();
-        foodValues.put("FoodID", FoodID);
         foodValues.put("FoodName", FoodName);
         foodValues.put("FoodCal", FoodCal);
         foodValues.put("FoodFat", FoodFat);
@@ -163,13 +255,11 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertDrink(SQLiteDatabase db,
-                                   Integer DrinkID,
                                    String DrinkName,
                                    Double DrinkCal,
                                    Double DrinkSugar,
                                    Double DrinkSod){
         ContentValues drinkValues = new ContentValues();
-        drinkValues.put("DrinkID", DrinkID);
         drinkValues.put("DrinkName", DrinkName);
         drinkValues.put("DrinkCal", DrinkCal);
         drinkValues.put("DrinkSugar", DrinkSugar);
@@ -179,7 +269,7 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
 
     private static void insertFoodEntry(SQLiteDatabase db,
                                         Integer FoodID,
-                                        String DayID,
+                                        Integer DayID,
                                         Integer UserID){
         ContentValues fEntryValues = new ContentValues();
         fEntryValues.put("FoodID", FoodID);
@@ -190,7 +280,7 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
 
     private static void insertDrinkEntry(SQLiteDatabase db,
                                         Integer DrinkID,
-                                        String DayID,
+                                        Integer DayID,
                                         Integer UserID){
         ContentValues dEntryValues = new ContentValues();
         dEntryValues.put("FoodID", DrinkID);
