@@ -17,95 +17,118 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        // Create users table
-        db.execSQL("CREATE TABLE USERS ("
-                + "UserID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "FirstName VARCHAR(45), "
-                + "LastName VARCHAR(45));");
-        // Create physical health table
-        db.execSQL("CREATE TABLE PHYSICALHEALTH ("
-                + "EntryID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "DayID Date, "
-                + "UserID INTEGER NOT NULL, "
-                + "ExcerID INTEGER DEFAULT NULL, "
-                + "FoodID INTEGER DEFAULT NULL, "
-                + "DrinkID INTEGER DEFAULT NULL, "
-                + "FoodQty DOUBLE DEFAULT(0), "
-                + "DrinkQty DOUBLE DEFAULT(0),"
-                + " FOREIGN KEY (UserID) REFERENCES USERS (UserID));");
-        // Create mental health table
-        db.execSQL("CREATE TABLE MENTALHEALTH ("
-                + "EntryID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "DayID Date, "
-                + "UserID INTEGER NOT NULL, "
-                + "AnxID INTEGER, "
-                + "MoodID INTEGER, "
-                + "Lo5 VARCHAR(1000), "
-                + "T4 VARCHAR(1000), "
-                + "Li3 VARCHAR(1000), "
-                + "S2 VARCHAR(1000), "
-                + "DesSur VARCHAR(1000), "
-                + "MoodLevel INTEGER, "
-                + "MoodDesc VARCHAR(1000), "
-                + "MoodTrigger VARCHAR(1000) DEFAULT '', "
-                + " FOREIGN KEY (UserID) REFERENCES USERS (UserID));");
-        // Create food table
-        db.execSQL("CREATE TABLE FOOD ("
-                + "FoodID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "FoodName VARCHAR(45),"
-                + "FoodCal DOUBLE, "
-                + "FoodFat DOUBLE, "
-                + "FoodSugar DOUBLE, "
-                + "FoodChol DOUBLE, "
-                + "FoodPotas DOUBLE, "
-                + "Microwaved TINYINT);");
-        // Create drink table
-        db.execSQL("CREATE TABLE DRINK ("
-                + "DrinkID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "DrinkName VARCHAR(45),"
-                + "DrinkCal DOUBLE, "
-                + "DrinkSugar DOUBLE, "
-                + "DrinkSod DOUBLE);");
-        // Create food entry joining table
-        db.execSQL("CREATE TABLE FOODENTRY ("
-                + "FoodID INTEGER NOT NULL, "
-                + "DayID Date,"
-                + "UserID INTEGER NOT NULL, "
-                + "CONSTRAINT pk_eatfood PRIMARY KEY(FoodID, DayID, UserID));");
-        // Create drink entry joining table
-        db.execSQL("CREATE TABLE DRINKENTRY ("
-                + "DrinkID INTEGER NOT NULL, "
-                + "DayID Date,"
-                + "UserID INTEGER NOT NULL, "
-                + "CONSTRAINT pk_eatdrink PRIMARY KEY(DrinkID, DayID, UserID));");
-
-        // Insert initial data
-        insertUser(db, "Annie", "Azul");
-        insertUser(db, "Betty", "Blue");
-        insertUser(db, "Casey", "Cyan");
-        insertUser(db, "Danny", "Denim");
-
-        insertMHealth(db, 0, 1, null);
-        insertMHealth(db, 20191201, 1, 1, 5,
-                "Very happy, excited, enthusiastic and motivated", "I got a promotion!");
-        insertMHealth(db, 1, 1, "Lamp, tv, fridge, shelf, desk", "Carpet, cat fur, leather, book cover",
-                "Cars, talking from the other room, tapping on a keyboard", "Popcorn, beer",
-                "I'm in my dorm room; it's a bit small, but cozy. I can relax here.");
-        insertMHealth(db, 2, 1, 4, "Confused, excited, nervous",
-                "I didn't get the part in the play, but I got a callback");
-
-        insertFood(db, "Lucky Charms", 110.0, 1.0,
-                10.0, 0.0, 55.0, false);
-        insertDrink(db, "Coke Zero", 0.0, 0.0, 40.0);
-
-        insertPHealth(db, 1, 20190403);
-
-        insertFoodEntry(db, 1, 20190403, 1);
-        insertDrinkEntry(db, 1, 20190403, 1);
+        updateMyDatabase(db, 0, DB_VERSION);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        if (oldVersion == 1){
+
+        }
+        if (oldVersion < 3){
+
+        }
+    }
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        if (oldVersion == 3){
+
+        }
+    }
+
+private void updateMyDatabase(SQLiteDatabase db,
+                              int oldVersion,
+                              int newVersion){
+        if (oldVersion < 1) {
+            // Create users table
+            db.execSQL("CREATE TABLE USERS ("
+                    + "UserID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "FirstName VARCHAR(45), "
+                    + "LastName VARCHAR(45));");
+            // Create physical health table
+            db.execSQL("CREATE TABLE PHYSICALHEALTH ("
+                    + "EntryID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "DayID Date, "
+                    + "UserID INTEGER NOT NULL, "
+                    + "ExercID INTEGER DEFAULT NULL, "
+                    + "FoodID INTEGER DEFAULT NULL, "
+                    + "DrinkID INTEGER DEFAULT NULL, "
+                    + "FoodQty DOUBLE DEFAULT(0), "
+                    + "DrinkQty DOUBLE DEFAULT(0),"
+                    + " FOREIGN KEY (UserID) REFERENCES USERS (UserID));");
+            // Create mental health table
+            db.execSQL("CREATE TABLE MENTALHEALTH ("
+                    + "EntryID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "DayID Date, "
+                    + "UserID INTEGER NOT NULL, "
+                    + "AnxID INTEGER, "
+                    + "MoodID INTEGER, "
+                    + "Lo5 VARCHAR(1000), "
+                    + "T4 VARCHAR(1000), "
+                    + "Li3 VARCHAR(1000), "
+                    + "S2 VARCHAR(1000), "
+                    + "DesSur VARCHAR(1000), "
+                    + "MoodLevel INTEGER, "
+                    + "MoodDesc VARCHAR(1000), "
+                    + "MoodTrigger VARCHAR(1000) DEFAULT '', "
+                    + " FOREIGN KEY (UserID) REFERENCES USERS (UserID));");
+            // Create food table
+            db.execSQL("CREATE TABLE FOOD ("
+                    + "FoodID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "FoodName VARCHAR(45),"
+                    + "FoodCal DOUBLE, "
+                    + "FoodFat DOUBLE, "
+                    + "FoodSugar DOUBLE, "
+                    + "FoodChol DOUBLE, "
+                    + "FoodPotas DOUBLE, "
+                    + "Microwaved TINYINT);");
+            // Create drink table
+            db.execSQL("CREATE TABLE DRINK ("
+                    + "DrinkID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "DrinkName VARCHAR(45),"
+                    + "DrinkCal DOUBLE, "
+                    + "DrinkSugar DOUBLE, "
+                    + "DrinkSod DOUBLE);");
+            // Create food entry joining table
+            db.execSQL("CREATE TABLE FOODENTRY ("
+                    + "FoodID INTEGER NOT NULL, "
+                    + "DayID Date,"
+                    + "UserID INTEGER NOT NULL, "
+                    + "CONSTRAINT pk_eatfood PRIMARY KEY(FoodID, DayID, UserID));");
+            // Create drink entry joining table
+            db.execSQL("CREATE TABLE DRINKENTRY ("
+                    + "DrinkID INTEGER NOT NULL, "
+                    + "DayID Date,"
+                    + "UserID INTEGER NOT NULL, "
+                    + "CONSTRAINT pk_eatdrink PRIMARY KEY(DrinkID, DayID, UserID));");
+
+            // Insert initial data
+            insertUser(db, "Annie", "Azul");
+            insertUser(db, "Betty", "Blue");
+            insertUser(db, "Casey", "Cyan");
+            insertUser(db, "Danny", "Denim");
+
+            insertMHealth(db, 0, 1, null);
+            insertMHealth(db, 20191201, 1, 1, 5,
+                    "Very happy, excited, enthusiastic and motivated", "I got a promotion!");
+            insertMHealth(db, 1, 1, "Lamp, tv, fridge, shelf, desk", "Carpet, cat fur, leather, book cover",
+                    "Cars, talking from the other room, tapping on a keyboard", "Popcorn, beer",
+                    "I'm in my dorm room; it's a bit small, but cozy. I can relax here.");
+            insertMHealth(db, 2, 1, 4, "Confused, excited, nervous",
+                    "I didn't get the part in the play, but I got a callback");
+
+            insertFood(db, "Lucky Charms", 110.0, 1.0,
+                    10.0, 0.0, 55.0, false);
+            insertDrink(db, "Coke Zero", 0.0, 0.0, 40.0);
+
+            insertPHealth(db, 1, 20190403);
+
+            insertFoodEntry(db, 1, 20190403, 1);
+            insertDrinkEntry(db, 1, 20190403, 1);
+        }
+        if (oldVersion < 2){
+            // section for adding future columns if needed
+        }
     }
 
     private static void insertUser(SQLiteDatabase db,
@@ -129,7 +152,7 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
     private static void insertPHealth(SQLiteDatabase db,
                                    Integer day,
                                    Integer user,
-                                   Integer excer,
+                                   Integer exerc,
                                    Integer food,
                                    Integer drink,
                                    Double foodQ,
@@ -137,7 +160,7 @@ public class HealthmasterDatabaseHelper extends SQLiteOpenHelper {
         ContentValues pHealthValues = new ContentValues();
         pHealthValues.put("DayID", day);
         pHealthValues.put("UserID", user);
-        pHealthValues.put("ExcerID", excer);
+        pHealthValues.put("ExercID", exerc);
         pHealthValues.put("FoodID", food);
         pHealthValues.put("DrinkID", drink);
         pHealthValues.put("FoodQty", foodQ);
