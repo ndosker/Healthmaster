@@ -12,12 +12,16 @@ The second feature of Healthmaster will allow users to monitor and limit their s
 Healthmaster will allow a user to let the app monitor the amount of time they spend in social media apps (Facebook, Twitter, Tumblr, etc.) and alert them once a certain threshold of continuous time has been reached. The user will be able to choose whether the app should differentiate between an overall sum of social app time (ie 5 minutes in Facebook + 10 minutes in Twitter + 10 minutes in Tumblr = 25 minutes of continuous time) or individual amounts of time per app (ie 5 minutes of continuous Facebook time, 10 minutes of continuous Twitter time, 10 minutes of continuous Tumblr time). With the latter, the amount of time would reset to 0 each time that the user switches to a different app.
 
 ## How I built it
-_still in progress_
+I have been using Android Studio to develop a prototype of the app. It's not yet fully functional, but I have enough completed to give you a taste of what's to come!
+
 ## Challenges I ran into
-_still in progress_
+I've been having a difficult time so far with formatting, but it's definitely more of a cosmetic issue that I can fix later on before the final product.
+
 ## Accomplishments that I'm proud of
-_still in progress_
+When I was initially working in Spring of 2019 as part of a group on a project for Mobile Application Development, the class where I first learned to use Android Studio, I couldn't figure out how to integrate SQL with Android apps and had a very difficult time with it. After taking a SQL class last semester, I found that I've come a long way!
+
 ## What I learned
-_still in progress_
+Even though I haven't reached the end of my project, I found that I severely underestimated the amount that I could finish in 3 days. I'm so excited to see what people think!
+
 ## What's next for 
-Android app implementation and getting placed in the Google Play Store, then moving on to iOS and the Apple App Store.
+Finishing Android app implementation and getting placed in the Google Play Store, then moving on to iOS and the Apple App Store.
