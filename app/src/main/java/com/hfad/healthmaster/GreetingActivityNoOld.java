@@ -7,6 +7,8 @@ import android.view.View;
 
 public class GreetingActivityNoOld extends AppCompatActivity {
 
+    public static Integer CURR_USER;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,15 +16,18 @@ public class GreetingActivityNoOld extends AppCompatActivity {
     }
 
     public void anxietyAttack(View view){
-
+        Intent intent = new Intent(GreetingActivityNoOld.this, AnxietyActivity.class);
+        startActivity(intent);
     }
 
     public void symptomCheck(View view){
-
+        //Intent intent = new Intent(GreetingActivityNoOld.this, SymptomsActivity.class);
+        //startActivity(intent);
     }
 
     public void newEntry(View view){
-
+        Intent intent = new Intent(GreetingActivityNoOld.this, NewEntryActivity.class);
+        startActivity(intent);
     }
 
     public void accessSettings(View view){

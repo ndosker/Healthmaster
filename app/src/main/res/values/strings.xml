@@ -5,6 +5,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="action_submit">Submit</string>
     <string name="action_register">Register</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -20,4 +21,16 @@
     <string name="action_logout">Log Out</string>
     <string name="back">Go Back</string>
     <string name="allow_apptrack">Track Social Media Consumption</string>
+    <string name="title_activity_symptom">SymptomActivity</string>
+
+    <string name="anx_greeting">Examine and focus on your environment,\nthen record the following information:</string>
+    <string name="look_five">Look at 5 Items:</string>
+    <string name="touch_four">Touch 4 Items:</string>
+    <string name="listen_three">Listen to 3 Sounds:</string>
+    <string name="smell_two">Smell 2 Scents:</string>
+    <string name="desc_sur">Describe your Surroundings:</string>
+
+    <string name="old_title">Your Previous Entries</string>
+    <string name="entries_txt"></string>
+
 </resources>

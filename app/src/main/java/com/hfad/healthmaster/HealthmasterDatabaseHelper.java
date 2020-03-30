@@ -133,7 +133,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         }
     }
 
-    private static void insertUser(SQLiteDatabase db,
+    protected static void insertUser(SQLiteDatabase db,
                                    String fname,
                                    String lname,
                                    String uname,
@@ -146,7 +146,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("USERS", null, userValues);
     }
 
-    private static void insertPHealth(SQLiteDatabase db,
+    protected static void insertPHealth(SQLiteDatabase db,
                                       Integer day,
                                       Integer user){
         ContentValues pHealthValues = new ContentValues();
@@ -155,7 +155,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("PHYSICALHEALTH", null, pHealthValues);
     }
 
-    private static void insertPHealth(SQLiteDatabase db,
+    protected static void insertPHealth(SQLiteDatabase db,
                                    Integer day,
                                    Integer user,
                                    Integer exerc,
@@ -174,7 +174,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("PHYSICALHEALTH", null, pHealthValues);
     }
 
-    private static void insertMHealth(SQLiteDatabase db,
+    protected static void insertMHealth(SQLiteDatabase db,
                                        Integer day,
                                        Integer user,
                                        Integer mLevel){
@@ -185,7 +185,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("MENTALHEALTH", null, mHealthValues);
     }
 
-    private static void insertMHealth(SQLiteDatabase db,
+    protected static void insertMHealth(SQLiteDatabase db,
                                       Integer day,
                                       Integer user,
                                       Integer mood,
@@ -201,7 +201,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         mHealthValues.put("MoodTrigger", mTrigger);
         db.insert("MENTALHEALTH", null, mHealthValues);
     }
-    private static void insertMHealth(SQLiteDatabase db,
+    protected static void insertMHealth(SQLiteDatabase db,
                                       Integer user,
                                       Integer mood,
                                       Integer mLevel,
@@ -234,8 +234,24 @@ private void updateMyDatabase(SQLiteDatabase db,
         mHealthValues.put("DesSur", DesSur);
         db.insert("MENTALHEALTH", null, mHealthValues);
     }
+    protected static void insertMHealth(SQLiteDatabase db,
+                                         Integer user,
+                                         String Lo5,
+                                         String T4,
+                                         String Li3,
+                                         String S2,
+                                         String DesSur){
+        ContentValues mHealthValues = new ContentValues();
+        mHealthValues.put("UserID", user);
+        mHealthValues.put("Lo5", Lo5);
+        mHealthValues.put("T4", T4);
+        mHealthValues.put("Li3", Li3);
+        mHealthValues.put("S2", S2);
+        mHealthValues.put("DesSur", DesSur);
+        db.insert("MENTALHEALTH", null, mHealthValues);
+    }
 
-    private static void insertMHealth(SQLiteDatabase db,
+    protected static void insertMHealth(SQLiteDatabase db,
                                       Integer day,
                                       Integer user,
                                       Integer anx,
@@ -264,7 +280,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("MENTALHEALTH", null, mHealthValues);
     }
 
-    private static void insertFood(SQLiteDatabase db,
+    protected static void insertFood(SQLiteDatabase db,
                                    String FoodName,
                                    Double FoodCal,
                                    Double FoodFat,
@@ -283,7 +299,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("FOOD", null, foodValues);
     }
 
-    private static void insertDrink(SQLiteDatabase db,
+    protected static void insertDrink(SQLiteDatabase db,
                                    String DrinkName,
                                    Double DrinkCal,
                                    Double DrinkSugar,
@@ -296,7 +312,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("DRINK", null, drinkValues);
     }
 
-    private static void insertFoodEntry(SQLiteDatabase db,
+    protected static void insertFoodEntry(SQLiteDatabase db,
                                         Integer FoodID,
                                         Integer DayID,
                                         Integer UserID){
@@ -307,7 +323,7 @@ private void updateMyDatabase(SQLiteDatabase db,
         db.insert("FOODENTRY", null, fEntryValues);
     }
 
-    private static void insertDrinkEntry(SQLiteDatabase db,
+    protected static void insertDrinkEntry(SQLiteDatabase db,
                                         Integer DrinkID,
                                         Integer DayID,
                                         Integer UserID){

@@ -18,15 +18,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*SQLiteOpenHelper healthmasterDatabaseHelper = new HealthmasterDatabaseHelper(this);
-        try {
-            SQLiteDatabase db = healthmasterDatabaseHelper.getWritableDatabase();
-        } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this,
-                    "Database unavailable",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-        }*/
     }
 
     public void checkUser(View view){
@@ -51,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.query("USERS",
                 new String[] {"Username", "Password"},
                 qString, null, null, null, null);
-        //System.out.println(cursor.getString(0) + ", " + cursor.getString(1));
             if (cursor.getCount() > 0) {
                 cursor.close();
                 cursor = db.query("USERS",
@@ -60,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                         null, null, null, null);
                 cursor.moveToFirst();
                 Integer userID = cursor.getInt(0);
+                GreetingActivityNoOld.CURR_USER = userID;
+                GreetingActivity.CURR_USER = userID;
                 System.out.println(userID);
                 Integer totalEntries = 0;
                 cursor.close();

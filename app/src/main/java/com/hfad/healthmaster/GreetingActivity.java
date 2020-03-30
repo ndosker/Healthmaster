@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 public class GreetingActivity extends AppCompatActivity {
 
+    public static Integer CURR_USER;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,19 +22,23 @@ public class GreetingActivity extends AppCompatActivity {
     }
 
     public void anxietyAttack(View view){
-
+        Intent intent = new Intent(GreetingActivity.this, AnxietyActivity.class);
+        startActivity(intent);
     }
 
     public void symptomCheck(View view){
-
+        Intent intent = new Intent(GreetingActivity.this, SymptomsActivity.class);
+        startActivity(intent);
     }
 
     public void newEntry(View view){
-
+        Intent intent = new Intent(GreetingActivity.this, NewEntryActivity.class);
+        startActivity(intent);
     }
 
     public void oldEntries(View view){
-
+        Intent intent = new Intent(GreetingActivity.this, OldEntriesActivity.class);
+        startActivity(intent);
     }
 
     public void accessSettings(View view){
