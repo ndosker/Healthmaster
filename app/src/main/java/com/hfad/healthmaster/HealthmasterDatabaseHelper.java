@@ -74,6 +74,12 @@ private void updateMyDatabase(SQLiteDatabase db,
                     + "MoodDesc VARCHAR(1000), "
                     + "MoodTrigger VARCHAR(1000) DEFAULT '', "
                     + " FOREIGN KEY (UserID) REFERENCES USERS (UserID));");
+            // Create exercise table
+            db. execSQL("CREATE TABLE EXERC ("
+                    + "ExercID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "Name VARCHAR(45), "
+                    + "Type VARCHAR(45), "
+                    + "Time DOUBLE NOT NULL)");
             // Create food table
             db.execSQL("CREATE TABLE FOOD ("
                     + "FoodID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -91,6 +97,12 @@ private void updateMyDatabase(SQLiteDatabase db,
                     + "DrinkCal DOUBLE, "
                     + "DrinkSugar DOUBLE, "
                     + "DrinkSod DOUBLE);");
+            // Create exercise entry joining table
+            db.execSQL("CREATE TABLE EXERCENTRY ("
+                    + "ExercID INTEGER NOT NULL, "
+                    + "DayID Date,"
+                    + "UserID INTEGER NOT NULL, "
+                    + "CONSTRAINT pk_exerc PRIMARY KEY(ExercID, DayID, UserID));");
             // Create food entry joining table
             db.execSQL("CREATE TABLE FOODENTRY ("
                     + "FoodID INTEGER NOT NULL, "
