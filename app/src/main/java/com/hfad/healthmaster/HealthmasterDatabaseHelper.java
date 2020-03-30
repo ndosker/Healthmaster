@@ -44,7 +44,9 @@ private void updateMyDatabase(SQLiteDatabase db,
             db.execSQL("CREATE TABLE USERS ("
                     + "UserID INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "FirstName VARCHAR(45), "
-                    + "LastName VARCHAR(45));");
+                    + "LastName VARCHAR(45), "
+                    + "Username VARCHAR(10), "
+                    + "Password VARCHAR(25));");
             // Create physical health table
             db.execSQL("CREATE TABLE PHYSICALHEALTH ("
                     + "EntryID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -103,10 +105,10 @@ private void updateMyDatabase(SQLiteDatabase db,
                     + "CONSTRAINT pk_eatdrink PRIMARY KEY(DrinkID, DayID, UserID));");
 
             // Insert initial data
-            insertUser(db, "Annie", "Azul");
-            insertUser(db, "Betty", "Blue");
-            insertUser(db, "Casey", "Cyan");
-            insertUser(db, "Danny", "Denim");
+            insertUser(db, "Annie", "Azul", "aazul", "testAzul");
+            insertUser(db, "Betty", "Blue", "beblue", "bluetest");
+            insertUser(db, "Casey", "Cyan", "cacyan", "Cyantest");
+            insertUser(db, "Danny", "Denim", "dadenim", "dENimTest");
 
             insertMHealth(db, 0, 1, null);
             insertMHealth(db, 20191201, 1, 1, 5,
@@ -133,10 +135,14 @@ private void updateMyDatabase(SQLiteDatabase db,
 
     private static void insertUser(SQLiteDatabase db,
                                    String fname,
-                                   String lname){
+                                   String lname,
+                                   String uname,
+                                   String pword){
         ContentValues userValues = new ContentValues();
         userValues.put("FirstName", fname);
-        userValues.put("FirstName", lname);
+        userValues.put("LastName", lname);
+        userValues.put("Username", uname);
+        userValues.put("Password", pword);
         db.insert("USERS", null, userValues);
     }
 
